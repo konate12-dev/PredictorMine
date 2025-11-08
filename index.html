@@ -1,399 +1,477 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pluto Predictor Mine ⭐️ TRUQUÉ 💣</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PLUTO — PREDICTOR MINE ⭐️ TRUQUÉ 💣</title>
 <style>
-  /* Reset */
-  * {
-    box-sizing: border-box;
-  }
-
-  html, body {
-    margin: 0; padding: 0; height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #eee;
-    overflow-x: hidden;
-  }
-
-  body {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    background: #001a33;
-  }
-
-  /* Canvas full screen behind */
-  #backgroundCanvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-    background: #001a33;
-  }
-
-  main {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 420px;
-    padding: 20px;
-    margin-top: 30px;
-    background: rgba(0, 50, 100, 0.8);
-    border-radius: 16px;
-    box-shadow: 0 0 40px #00bfffaa;
-    user-select: none;
-  }
-
-  h1 {
-    text-align: center;
-    font-weight: 900;
-    letter-spacing: 2px;
-    font-size: 2.8rem;
-    text-shadow: 0 0 10px #00d0ff;
-    margin-bottom: 8px;
-  }
-
-  h2 {
-    text-align: center;
-    color: #00eaff;
-    font-weight: 700;
-    margin-top: 0;
-    margin-bottom: 18px;
-    text-shadow: 0 0 8px #00eaff;
-  }
-
-  label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 6px;
-    font-size: 1rem;
-    letter-spacing: 0.06em;
-  }
-
-  input[type=text] {
-    width: 100%;
-    padding: 12px 15px;
-    font-size: 1.1rem;
-    border-radius: 10px;
-    border: none;
-    outline-offset: 2px;
-    outline-color: #00cfff;
-    margin-bottom: 20px;
-    transition: outline-color 0.3s ease;
-    background: #003366;
-    color: #eee;
-  }
-
-  input[type=text]:focus {
-    outline-color: #00ffff;
-  }
-
-  button {
-    background: #00cfff;
-    border: none;
-    border-radius: 10px;
-    color: #003049;
-    font-weight: 700;
-    font-size: 1.2rem;
-    padding: 14px 28px;
-    cursor: pointer;
-    box-shadow: 0 7px 15px #00b4ffaa;
-    transition: background-color 0.3s ease, transform 0.15s ease;
-    user-select: none;
-  }
-
-  button:hover {
-    background: #00e0ff;
-    transform: scale(1.05);
-  }
-
-  button:active {
-    transform: scale(0.95);
-  }
-
-  .error {
-    color: #ff5555;
-    font-weight: 600;
-    min-height: 24px;
-    margin-bottom: 15px;
-    user-select: none;
-    text-align: center;
-  }
-
-  #grid {
-    display: grid;
-    grid-template-columns: repeat(5, 60px);
-    grid-template-rows: repeat(5, 60px);
-    gap: 12px;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .cell {
-    background: #005bb5;
-    border-radius: 12px;
-    box-shadow: inset 0 0 12px #0080ffcc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    color: gold;
-    user-select: none;
-    cursor: default;
-    transition: background-color 0.3s ease;
-  }
-
-  .cell.star {
-    animation: popStar 0.6s ease forwards;
-  }
-
-  @keyframes popStar {
-    0% {
-      transform: scale(0.3);
-      opacity: 0;
-    }
-    60% {
-      transform: scale(1.2);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-
-  #starsCount {
-    margin-top: 14px;
-    font-weight: 700;
-    font-size: 1.2rem;
-    text-align: center;
-    color: #ffd700;
-    text-shadow: 0 0 12px #ffdb3f;
-    user-select: none;
-  }
-
-  #promoInfo {
-    margin-top: 26px;
-    font-weight: 600;
-    text-align: center;
-    color: #00dfff;
-    user-select: none;
-  }
-
-  #promoInfo a {
-    color: #00ffff;
-    text-decoration: underline;
-  }
-
-  /* Responsive */
-  @media (max-width: 480px) {
-    #grid {
-      grid-template-columns: repeat(5, 45px);
-      grid-template-rows: repeat(5, 45px);
-      gap: 8px;
-    }
-    .cell {
-      width: 45px;
-      height: 45px;
-      font-size: 24px;
-    }
-  }
-
-  #footer {
-    margin-top: 40px;
-    font-size: 0.85rem;
-    color: #5599ccaa;
-    user-select: none;
-    text-align: center;
-  }
+  /* ===== Reset & base ===== */
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#e9f5ff;background:#001426}
+  a{color:inherit}
+  button{cursor:pointer}
+  /* ===== background canvas ===== */
+  #bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+  /* ===== layout ===== */
+  .page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:28px 16px}
+  main{width:100%;max-width:980px}
+  .card{background:linear-gradient(180deg, rgba(2,46,84,0.9), rgba(0,85,170,0.9));border-radius:16px;padding:18px;box-shadow:0 12px 40px rgba(0,30,80,0.45);color:#e9f8ff}
+  header{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:70px;height:70px;border-radius:12px;background:linear-gradient(180deg,#00c2ff,#0077ff);display:flex;align-items:center;justify-content:center;font-weight:900;color:#03263a}
+  h1{font-size:20px;margin:0}
+  .promoSmall{font-weight:700;color:#ffeb99}
+  /* ===== form ===== */
+  .formRow{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+  label{font-size:13px;color:#dff3ff;font-weight:700;margin-bottom:6px}
+  input[type=text]{padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:#eaf9ff;font-weight:700}
+  .btnPrimary{background:#ffd600;color:#04233a;border:none;padding:10px 14px;border-radius:10px;font-weight:800}
+  .btnSecondary{background:transparent;border:1px solid rgba(255,255,255,0.08);padding:10px 12px;border-radius:10px;color:#dff3ff}
+  .muted{color:#a9d3ee;font-size:13px}
+  /* ===== board ===== */
+  .boardWrap{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}
+  .left{flex:1;min-width:300px}
+  .right{width:360px;min-width:260px}
+  .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px}
+  .cell{background:#0e5bb8;height:68px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;color:gold;position:relative;user-select:none}
+  .cell.dim{opacity:0.16}
+  .controls{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
+  .smallInfo{background:rgba(255,255,255,0.03);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-size:13px}
+  .starsRow{display:flex;gap:6px;align-items:center;margin-top:8px}
+  .starMini{font-size:20px}
+  .tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .history{max-height:160px;overflow:auto;background:rgba(255,255,255,0.02);border-radius:8px;padding:8px;margin-top:10px;font-size:13px}
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(3,6,18,0.7);display:none;align-items:center;justify-content:center;z-index:50}
+  .modal{background:linear-gradient(180deg,#003f7a,#005ea2);padding:14px;border-radius:12px;width:92%;max-width:520px;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+  .modal img{width:100%;border-radius:10px;object-fit:cover}
+  .rowCenter{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:10px}
+  .danger{color:#ffdd99}
+  /* footer */
+  footer{margin-top:18px;color:#9fc7e5;font-size:13px;text-align:center}
+  /* responsive */
+  @media (max-width:820px){.right{width:100%}.boardWrap{flex-direction:column}}
 </style>
 </head>
 <body>
+<canvas id="bg"></canvas>
 
-<canvas id="backgroundCanvas"></canvas>
+<div class="page">
+  <main>
+    <div class="card">
+      <header>
+        <div class="brand">
+          <div class="logo">PLUTO</div>
+          <div>
+            <h1>PREDICTOR MINE ⭐️ TRUQUÉ 💣</h1>
+            <div class="muted">Interface officielle — code promo obligatoire</div>
+          </div>
+        </div>
+        <div class="promoSmall">Code promo 1win : <strong>PCP5</strong> — 500% BONUS</div>
+      </header>
 
-<main>
-  <h1>PLUTO</h1>
+      <!-- Form -->
+      <div class="formRow" id="loginForm">
+        <div style="flex:1;min-width:200px">
+          <label for="promo">Code promo</label>
+          <input id="promo" type="text" placeholder="PCP5" aria-label="Code promo" />
+        </div>
+        <div style="width:220px">
+          <label for="userid">ID 1win (4-8 chiffres)</label>
+          <input id="userid" type="text" placeholder="1234567" aria-label="ID utilisateur" />
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:8px">
+          <button class="btnPrimary" id="btnVerify">VÉRIFIER</button>
+          <button class="btnSecondary" id="btnReset">RESET</button>
+        </div>
+      </div>
+      <div id="error" class="muted" style="margin-top:6px;height:20px;color:#ffd6d6"></div>
 
-  <section id="loginSection" aria-label="Section de connexion">
-    <label for="promoCode">Code Promo <sup style="color:#ff4444;">*</sup></label>
-    <input id="promoCode" type="text" placeholder="Entrez le code promo (ex: PCP5)" maxlength="10" autocomplete="off" aria-required="true" aria-describedby="promoHelp" />
-  
-    <label for="userId">ID Utilisateur <sup style="color:#ff4444;">*</sup></label>
-    <input id="userId" type="text" placeholder="4 à 8 chiffres" maxlength="8" autocomplete="off" aria-required="true" aria-describedby="idHelp" />
-  
-    <button id="btnValidate" onclick="verifyLogin()" aria-label="Valider code promo et ID utilisateur">Valider</button>
-  
-    <div class="error" id="errorMsg" role="alert" aria-live="assertive"></div>
-  </section>
+      <div class="boardWrap" style="margin-top:14px">
+        <div class="left">
+          <div class="smallInfo">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div><strong id="roundLabel">TOUR —</strong></div>
+              <div class="muted">Ne partagez pas votre ID — tout reste local</div>
+            </div>
+            <div id="grid" class="grid" style="margin-top:10px"></div>
 
-  <section id="predictionSection" style="display:none;" aria-label="Section des prédictions">
-    <h2>PREDICTOR MINE ⭐️ TRUQUÉ 💣</h2>
-    <div id="grid" aria-label="Grille de prédiction 5 par 5"></div>
-    <div id="starsCount" aria-live="polite"></div>
-    <button style="margin-top: 25px;" onclick="generatePrediction()" aria-label="Générer nouvelle prédiction">Nouvelle prédiction</button>
+            <div class="starsRow" id="starsRow"></div>
+            <div class="controls">
+              <button class="btnPrimary" id="btnPredict" disabled>PRÉDICTOR</button>
+              <div id="cooldownMsg" style="min-width:180px;color:#ffeb99;font-weight:800"></div>
+            </div>
 
-    <div id="promoInfo" aria-label="Informations code promo">
-      Code promo 1win : <strong>PCP5</strong> — 
-      <a href="https://1wlucb.life/?open=register&p=hney" target="_blank" rel="noopener noreferrer" aria-label="Lien inscription 1win avec code promo PCP5">Lien inscription</a> — Bonus 500%
+            <div id="resultMsg" style="margin-top:8px;font-weight:800;color:#dff3ff"></div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="smallInfo">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-weight:900">Outils pro</div>
+              <div class="muted">Export & partage</div>
+            </div>
+
+            <div class="tools">
+              <button class="btnSecondary" id="btnCopy">Copier positions</button>
+              <button class="btnSecondary" id="btnExport">Exporter PNG</button>
+              <button class="btnSecondary" id="btnHistoryClear">Effacer historique</button>
+            </div>
+
+            <div style="margin-top:12px;font-weight:800">Inscription</div>
+            <div style="margin-top:8px">
+              <div class="muted">Si tu n'as pas de compte 1win, inscris-toi :</div>
+              <div class="rowCenter" style="margin-top:8px">
+                <button class="btnPrimary" id="btnSignup">Je m'inscris</button>
+                <button class="btnSecondary" id="btnAlready">Déjà inscrit</button>
+              </div>
+              <div style="margin-top:8px" class="muted">Lien & code promo affichés en haut — 1 clic ouvre le lien</div>
+            </div>
+
+            <div style="margin-top:12px;font-weight:900">Historique</div>
+            <div id="history" class="history"></div>
+          </div>
+        </div>
+      </div>
+
+      <footer>Rappel : le code promo <strong>PCP5</strong> est obligatoire — l'ID n'est jamais envoyé.</footer>
     </div>
-  </section>
+  </main>
+</div>
 
-  <footer id="footer">&copy; 2025 Pluto Predictor - Tous droits réservés</footer>
-</main>
+<!-- Modal inscription (image) -->
+<div class="overlay" id="modalOverlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button style="position:absolute;right:12px;top:12px;border-radius:8px;padding:6px;border:none;background:#fff;color:#003049;font-weight:900" id="modalClose">✕</button>
+    <img src="https://supposed-copper-ycmbufd9mj.edgeone.app/IMG_5633.jpeg" alt="Inscription" />
+    <div class="rowCenter" style="margin-top:12px">
+      <button class="btnPrimary" id="modalSignup">Je m'inscris</button>
+      <button class="btnSecondary" id="modalAlready">Déjà inscrit</button>
+    </div>
+    <div style="margin-top:10px;text-align:center" class="muted">Code promo : <strong>PCP5</strong> — 500% BONUS</div>
+  </div>
+</div>
 
 <script>
-  const bgCanvas = document.getElementById('backgroundCanvas');
-  const ctx = bgCanvas.getContext('2d');
-  let width, height;
-  let points = [];
+/* =========================
+   Config & state
+   ========================= */
+const SIGNUP_LINK = "https://1wlucb.life/?open=register&p=hney"; // ton lien
+const REQUIRED_PROMO = "PCP5";
+let state = {
+  verified: false,
+  lastResult: null,
+  round: 0,
+  cooldown: false,
+  cooldownTimer: null,
+  cooldownRemaining: 0,
+  lastPositions: [],
+  history: [] // stock local (session only)
+};
 
-  // Initialize points for background effect
-  function initPoints() {
-    points = [];
-    const spacing = 70;
-    for(let y = spacing; y < height; y += spacing) {
-      for(let x = spacing; x < width; x += spacing) {
-        points.push({x, y, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3});
+/* =========================
+   Background animation (canvas points + lines)
+   ========================= */
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+let W, H, pts = [];
+function resize() {
+  W = canvas.width = innerWidth;
+  H = canvas.height = innerHeight;
+  initPoints();
+}
+function initPoints(){
+  pts = [];
+  const spacing = Math.max(70, Math.min(120, Math.floor(Math.min(W,H)/8)));
+  for(let y=spacing; y<H; y+=spacing){
+    for(let x=spacing; x<W; x+=spacing){
+      pts.push({x:x+Math.random()*30-15, y:y+Math.random()*30-15, vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3});
+    }
+  }
+}
+function drawBg(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = "rgba(0,200,255,0.06)";
+  ctx.strokeStyle = "rgba(0,150,255,0.09)";
+  ctx.lineWidth = 1;
+  for(const p of pts){
+    p.x += p.vx; p.y += p.vy;
+    if(p.x<0||p.x>W) p.vx *= -1;
+    if(p.y<0||p.y>H) p.vy *= -1;
+    ctx.beginPath(); ctx.arc(p.x,p.y,2.2,0,Math.PI*2); ctx.fill();
+  }
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      const a=pts[i], b=pts[j];
+      const dx=a.x-b.x, dy=a.y-b.y;
+      const d=Math.hypot(dx,dy);
+      if(d<110){
+        ctx.globalAlpha = 1 - d/110;
+        ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
       }
     }
   }
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(drawBg);
+}
+addEventListener('resize', resize);
+resize(); drawBg();
 
-  // Draw points and connect lines if close
-  function drawBackground() {
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = '#00bfff';
-    ctx.strokeStyle = 'rgba(0,191,255,0.15)';
-    ctx.lineWidth = 1;
+/* =========================
+   UI elements
+   ========================= */
+const promoInput = document.getElementById('promo');
+const idInput = document.getElementById('userid');
+const btnVerify = document.getElementById('btnVerify');
+const btnReset = document.getElementById('btnReset');
+const errorEl = document.getElementById('error');
 
-    // Update point positions
-    for(let p of points) {
-      p.x += p.vx;
-      p.y += p.vy;
+const gridEl = document.getElementById('grid');
+const starsRow = document.getElementById('starsRow');
+const btnPredict = document.getElementById('btnPredict');
+const cooldownMsg = document.getElementById('cooldownMsg');
+const roundLabel = document.getElementById('roundLabel');
+const resultMsg = document.getElementById('resultMsg');
 
-      // Bounce within window
-      if(p.x < 0 || p.x > width) p.vx = -p.vx;
-      if(p.y < 0 || p.y > height) p.vy = -p.vy;
+const btnCopy = document.getElementById('btnCopy');
+const btnExport = document.getElementById('btnExport');
+const historyEl = document.getElementById('history');
+const btnHistoryClear = document.getElementById('btnHistoryClear');
 
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
-      ctx.fill();
-    }
+const btnSignup = document.getElementById('btnSignup');
+const btnAlready = document.getElementById('btnAlready');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalClose = document.getElementById('modalClose');
+const modalSignup = document.getElementById('modalSignup');
+const modalAlready = document.getElementById('modalAlready');
 
-    // Draw connecting lines between close points
-    for(let i=0; i<points.length; i++) {
-      for(let j=i+1; j<points.length; j++) {
-        let dx = points[i].x - points[j].x;
-        let dy = points[i].y - points[j].y;
-        let dist = Math.sqrt(dx*dx + dy*dy);
-        if(dist < 110) {
-          ctx.beginPath();
-          ctx.moveTo(points[i].x, points[i].y);
-          ctx.lineTo(points[j].x, points[j].y);
-          ctx.stroke();
-        }
-      }
-    }
+const btnModalSignup = document.getElementById('modalSignup');
+
+/* =========================
+   Validation & verify
+   ========================= */
+btnVerify.addEventListener('click', ()=>{
+  const promo = (promoInput.value||"").trim().toUpperCase();
+  const uid = (idInput.value||"").trim();
+  errorEl.textContent = "";
+  if(promo !== REQUIRED_PROMO){
+    errorEl.textContent = "Code promo invalide. Entrez PCP5.";
+    return;
   }
-
-  function resizeCanvas() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    bgCanvas.width = width;
-    bgCanvas.height = height;
-    initPoints();
+  if(!/^\d{4,8}$/.test(uid)){
+    errorEl.textContent = "ID invalide. Doit contenir 4 à 8 chiffres.";
+    return;
   }
+  // verified locally (no sending)
+  state.verified = true;
+  errorEl.textContent = "";
+  btnPredict.disabled = false;
+  resultMsg.textContent = "Prédictions activées — clique sur PRÉDICTOR";
+  // show signup modal once when verified
+  showModal();
+});
 
-  window.addEventListener('resize', () => {
-    resizeCanvas();
+btnReset.addEventListener('click', ()=>{
+  promoInput.value = "";
+  idInput.value = "";
+  state.verified = false;
+  state.history = [];
+  updateHistory();
+  btnPredict.disabled = true;
+  errorEl.textContent = "";
+  resultMsg.textContent = "";
+  roundLabel.textContent = "TOUR —";
+});
+
+/* =========================
+   Prediction generation
+   ========================= */
+function chooseStarsWeighted(){
+  const items = [{v:4,w:32},{v:5,w:32},{v:6,w:22},{v:7,w:14}];
+  let total = items.reduce((s,i)=>s+i.w,0);
+  let r=Math.random()*total;
+  for(const it of items){ if(r<it.w) return it.v; r-=it.w; }
+  return 4;
+}
+function generatePrediction(forced){
+  const n = forced || chooseStarsWeighted();
+  const bombs = new Set();
+  while(bombs.size < 3) bombs.add(Math.floor(Math.random()*25));
+  const nonBomb = [];
+  for(let i=0;i<25;i++) if(!bombs.has(i)) nonBomb.push(i);
+  const stars = [];
+  while(stars.length < n){
+    const s = nonBomb[Math.floor(Math.random()*nonBomb.length)];
+    if(!stars.includes(s)) stars.push(s);
+  }
+  stars.sort((a,b)=>a-b);
+  return {n, bombs: Array.from(bombs).sort((a,b)=>a-b), stars};
+}
+
+function renderPrediction(pred){
+  gridEl.innerHTML = "";
+  starsRow.innerHTML = "";
+  for(let i=0;i<25;i++){
+    const c = document.createElement('div');
+    c.className = "cell";
+    if(pred.stars.includes(i)){
+      c.textContent = "⭐️";
+      c.classList.add('star');
+    } else {
+      c.textContent = "";
+      c.classList.add('dim');
+    }
+    gridEl.appendChild(c);
+  }
+  // stars miniature
+  pred.stars.forEach((s,idx)=>{
+    const el = document.createElement('div');
+    el.className = 'starMini';
+    el.textContent = "⭐️";
+    el.style.fontSize = (16 + Math.min(18, idx*3)) + "px";
+    starsRow.appendChild(el);
   });
+  // update state
+  state.round++;
+  roundLabel.textContent = `TOUR ${state.round}`;
+  state.lastPositions = pred.stars;
+  state.history.unshift({time: new Date().toLocaleString(), stars: pred.stars.slice(), bombs: pred.bombs.slice()});
+  updateHistory();
+  // show result message
+  resultMsg.textContent = "Nouvelle prédiction";
+}
 
-  function animate() {
-    drawBackground();
-    requestAnimationFrame(animate);
+/* cooldown 30 seconds */
+function startCooldown(seconds=30){
+  if(state.cooldownTimer) clearInterval(state.cooldownTimer);
+  state.cooldown = true;
+  state.cooldownRemaining = seconds;
+  btnPredict.disabled = true;
+  cooldownMsg.textContent = `Attendez ${state.cooldownRemaining}s pour nouvelle prédiction`;
+  state.cooldownTimer = setInterval(()=>{
+    state.cooldownRemaining--;
+    if(state.cooldownRemaining <= 0){
+      clearInterval(state.cooldownTimer);
+      state.cooldown = false;
+      cooldownMsg.textContent = "";
+      if(state.verified) btnPredict.disabled = false;
+    } else {
+      cooldownMsg.textContent = `Attendez ${state.cooldownRemaining}s pour nouvelle prédiction`;
+    }
+  },1000);
+}
+
+/* Predict button */
+btnPredict.addEventListener('click', ()=>{
+  if(!state.verified){
+    errorEl.textContent = "Activez le code promo PCP5 + ID valide d'abord.";
+    return;
   }
-
-  resizeCanvas();
-  animate();
-
-  // ----------- Prédiction & Validation -------------
-
-  function verifyLogin() {
-    const promo = document.getElementById('promoCode').value.trim().toUpperCase();
-    const userId = document.getElementById('userId').value.trim();
-    const error = document.getElementById('errorMsg');
-    error.textContent = '';
-
-    if (promo !== 'PCP5') {
-      error.textContent = "Le code promo est obligatoire et doit être 'PCP5'.";
-      return;
-    }
-    if (!/^\d{4,8}$/.test(userId)) {
-      error.textContent = "L'ID utilisateur doit contenir entre 4 et 8 chiffres.";
-      return;
-    }
-
-    document.getElementById('loginSection').style.display = 'none';
-    document.getElementById('predictionSection').style.display = 'block';
-
-    generatePrediction();
+  if(state.cooldown){
+    errorEl.textContent = `Patiente ${state.cooldownRemaining}s avant nouvelle prédiction.`;
+    return;
   }
+  const pred = generatePrediction();
+  renderPrediction(pred);
+  startCooldown(30); // 30s between predictions
+});
 
-  function generatePrediction() {
-    const grid = document.getElementById('grid');
-    const starsCountDiv = document.getElementById('starsCount');
-    grid.innerHTML = '';
-
-    // Choix étoile entre 4 et 7, fréquence pondérée
-    const starOptions = [4, 4, 5, 5, 6, 6, 7];
-    const starsCount = starOptions[Math.floor(Math.random() * starOptions.length)];
-
-    // 3 bombes uniques
-    const bombs = new Set();
-    while (bombs.size < 3) {
-      bombs.add(Math.floor(Math.random() * 25));
-    }
-
-    // Récupérer cases non bombes pour placer étoiles
-    const nonBombCells = [];
-    for(let i=0; i<25; i++) {
-      if(!bombs.has(i)) nonBombCells.push(i);
-    }
-
-    // Choisir indices étoiles aléatoires sans répétition
-    const starIndices = [];
-    while(starIndices.length < starsCount) {
-      const idx = nonBombCells[Math.floor(Math.random() * nonBombCells.length)];
-      if(!starIndices.includes(idx)) starIndices.push(idx);
-    }
-
-    // Construire grille
-    for(let i=0; i<25; i++) {
-      const cell = document.createElement('div');
-      cell.className = 'cell';
-
-      if(bombs.has(i)) {
-        cell.textContent = ''; // Bombe invisible
-      } else if(starIndices.includes(i)) {
-        cell.textContent = '⭐️';
-        cell.classList.add('star');
-      } else {
-        cell.textContent = '';
-      }
-
-      grid.appendChild(cell);
-    }
-
-    starsCountDiv.textContent = `Nombre d'étoiles : ${starsCount} — 3 bombes`;
+/* =========================
+   History & tools
+   ========================= */
+function updateHistory(){
+  historyEl.innerHTML = "";
+  for(const item of state.history.slice(0,30)){
+    const div = document.createElement('div');
+    div.style.padding = "6px 4px";
+    div.style.borderBottom = "1px dashed rgba(255,255,255,0.03)";
+    div.textContent = `${item.time} — ⭐ ${item.stars.length} — positions: ${item.stars.join(',')}`;
+    historyEl.appendChild(div);
   }
+}
+btnHistoryClear.addEventListener('click', ()=>{
+  if(!confirm("Effacer l'historique local ?")) return;
+  state.history = [];
+  updateHistory();
+});
+
+/* copy positions */
+btnCopy.addEventListener('click', ()=>{
+  if(!state.lastPositions || state.lastPositions.length===0){
+    alert("Aucune prédiction à copier.");
+    return;
+  }
+  const text = `Positions étoiles: ${state.lastPositions.join(',')}`;
+  navigator.clipboard?.writeText(text).then(()=>{
+    alert("Positions copiées !");
+  }).catch(()=>{ prompt("Copie manuelle :", text); });
+});
+
+/* export PNG (draw grid to canvas) */
+btnExport.addEventListener('click', async ()=>{
+  // create a temporary canvas
+  const size = 600;
+  const cellSize = Math.floor((size - 40) / 5);
+  const canvas2 = document.createElement('canvas');
+  canvas2.width = size; canvas2.height = size;
+  const c2 = canvas2.getContext('2d');
+  // background
+  c2.fillStyle = "#002f66"; c2.fillRect(0,0,size,size);
+  // draw cells
+  for(let i=0;i<25;i++){
+    const col = i%5, row=Math.floor(i/5);
+    const x = 20 + col*cellSize + col*4;
+    const y = 20 + row*cellSize + row*4;
+    c2.fillStyle = "#0e5bb8";
+    c2.fillRect(x,y,cellSize,cellSize);
+    // draw star?
+    if(state.lastPositions.includes(i)){
+      c2.font = `${Math.floor(cellSize*0.6)}px serif`;
+      c2.textAlign = "center"; c2.textBaseline = "middle";
+      c2.fillStyle = "#ffd700";
+      c2.fillText("⭐", x+cellSize/2, y+cellSize/2+2);
+    }
+  }
+  // download
+  const url = canvas2.toDataURL("image/png");
+  const a = document.createElement('a'); a.href = url; a.download = `prediction_${Date.now()}.png`;
+  document.body.appendChild(a); a.click(); a.remove();
+});
+
+/* =========================
+   Signup modal behavior
+   ========================= */
+function showModal(){ modalOverlay.style.display = 'flex'; modalOverlay.setAttribute('aria-hidden','false'); }
+function hideModal(){ modalOverlay.style.display = 'none'; modalOverlay.setAttribute('aria-hidden','true'); }
+
+btnSignup.addEventListener('click', ()=> showModal());
+btnAlready.addEventListener('click', ()=> { hideModal(); resultMsg.textContent = "Bienvenue — tu peux maintenant jouer."; });
+
+modalClose.addEventListener('click', hideModal);
+modalAlready.addEventListener('click', ()=> { hideModal(); });
+
+modalSignup.addEventListener('click', ()=>{
+  // open link in new tab (one click)
+  window.open(SIGNUP_LINK, '_blank', 'noopener');
+});
+
+/* =========================
+   Safety note: do NOT send user's ID anywhere
+   Everything is client-side; we don't POST or save to server.
+   ========================= */
+
+/* =========================
+   Init & prefill grid
+   ========================= */
+function initGridBlank(){
+  gridEl.innerHTML = "";
+  for(let i=0;i<25;i++){
+    const c = document.createElement('div'); c.className='cell dim'; c.textContent = ''; gridEl.appendChild(c);
+  }
+}
+initGridBlank();
+
 </script>
-
 </body>
 </html>
