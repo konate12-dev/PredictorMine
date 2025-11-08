@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pluto Predictor Mine ⭐️ TRUQUÉ 💣</title>
+<style>
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #eee;
+    overflow-x: hidden;
+  }
+
+  body {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    background: #001a33;
+  }
+
+  /* Canvas full screen behind */
+  #backgroundCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    background: #001a33;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    margin-top: 30px;
+    background: rgba(0, 50, 100, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 0 40px #00bfffaa;
+    user-select: none;
+  }
+
+  h1 {
+    text-align: center;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: 2.8rem;
+    text-shadow: 0 0 10px #00d0ff;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #00eaff;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 18px;
+    text-shadow: 0 0 8px #00eaff;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+  }
+
+  input[type=text] {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    border: none;
+    outline-offset: 2px;
+    outline-color: #00cfff;
+    margin-bottom: 20px;
+    transition: outline-color 0.3s ease;
+    background: #003366;
+    color: #eee;
+  }
+
+  input[type=text]:focus {
+    outline-color: #00ffff;
+  }
+
+  button {
+    background: #00cfff;
+    border: none;
+    border-radius: 10px;
+    color: #003049;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 14px 28px;
+    cursor: pointer;
+    box-shadow: 0 7px 15px #00b4ffaa;
+    transition: background-color 0.3s ease, transform 0.15s ease;
+    user-select: none;
+  }
+
+  button:hover {
+    background: #00e0ff;
+    transform: scale(1.05);
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+
+  .error {
+    color: #ff5555;
+    font-weight: 600;
+    min-height: 24px;
+    margin-bottom: 15px;
+    user-select: none;
+    text-align: center;
+  }
+
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-template-rows: repeat(5, 60px);
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .cell {
+    background: #005bb5;
+    border-radius: 12px;
+    box-shadow: inset 0 0 12px #0080ffcc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: gold;
+    user-select: none;
+    cursor: default;
+    transition: background-color 0.3s ease;
+  }
+
+  .cell.star {
+    animation: popStar 0.6s ease forwards;
+  }
+
+  @keyframes popStar {
+    0% {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  #starsCount {
+    margin-top: 14px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #ffd700;
+    text-shadow: 0 0 12px #ffdb3f;
+    user-select: none;
+  }
+
+  #promoInfo {
+    margin-top: 26px;
+    font-weight: 600;
+    text-align: center;
+    color: #00dfff;
+    user-select: none;
+  }
+
+  #promoInfo a {
+    color: #00ffff;
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    #grid {
+      grid-template-columns: repeat(5, 45px);
+      grid-template-rows: repeat(5, 45px);
+      gap: 8px;
+    }
+    .cell {
+      width: 45px;
+      height: 45px;
+      font-size: 24px;
+    }
+  }
+
+  #footer {
+    margin-top: 40px;
+    font-size: 0.85rem;
+    color: #5599ccaa;
+    user-select: none;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="backgroundCanvas"></canvas>
+
+<main>
+  <h1>PLUTO</h1>
+
+  <section id="loginSection" aria-label="Section de connexion">
+    <label for="promoCode">Code Promo <sup style="color:#ff4444;">*</sup></label>
+    <input id="promoCode" type="text" placeholder="Entrez le code promo (ex: PCP5)" maxlength="10" autocomplete="off" aria-required="true" aria-describedby="promoHelp" />
+  
+    <label for="userId">ID Utilisateur <sup style="color:#ff4444;">*</sup></label>
+    <input id="userId" type="text" placeholder="4 à 8 chiffres" maxlength="8" autocomplete="off" aria-required="true" aria-describedby="idHelp" />
+  
+    <button id="btnValidate" onclick="verifyLogin()" aria-label="Valider code promo et ID utilisateur">Valider</button>
+  
+    <div class="error" id="errorMsg" role="alert" aria-live="assertive"></div>
+  </section>
+
+  <section id="predictionSection" style="display:none;" aria-label="Section des prédictions">
+    <h2>PREDICTOR MINE ⭐️ TRUQUÉ 💣</h2>
+    <div id="grid" aria-label="Grille de prédiction 5 par 5"></div>
+    <div id="starsCount" aria-live="polite"></div>
+    <button style="margin-top: 25px;" onclick="generatePrediction()" aria-label="Générer nouvelle prédiction">Nouvelle prédiction</button>
+
+    <div id="promoInfo" aria-label="Informations code promo">
+      Code promo 1win : <strong>PCP5</strong> — 
+      <a href="https://1wlucb.life/?open=register&p=hney" target="_blank" rel="noopener noreferrer" aria-label="Lien inscription 1win avec code promo PCP5">Lien inscription</a> — Bonus 500%
+    </div>
+  </section>
+
+  <footer id="footer">&copy; 2025 Pluto Predictor - Tous droits réservés</footer>
+</main>
+
+<script>
+  const bgCanvas = document.getElementById('backgroundCanvas');
+  const ctx = bgCanvas.getContext('2d');
+  let width, height;
+  let points = [];
+
+  // Initialize points for background effect
+  function initPoints() {
+    points = [];
+    const spacing = 70;
+    for(let y = spacing; y < height; y += spacing) {
+      for(let x = spacing; x < width; x += spacing) {
+        points.push({x, y, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3});
+      }
+    }
+  }
+
+  // Draw points and connect lines if close
+  function drawBackground() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = '#00bfff';
+    ctx.strokeStyle = 'rgba(0,191,255,0.15)';
+    ctx.lineWidth = 1;
+
+    // Update point positions
+    for(let p of points) {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Bounce within window
+      if(p.x < 0 || p.x > width) p.vx = -p.vx;
+      if(p.y < 0 || p.y > height) p.vy = -p.vy;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Draw connecting lines between close points
+    for(let i=0; i<points.length; i++) {
+      for(let j=i+1; j<points.length; j++) {
+        let dx = points[i].x - points[j].x;
+        let dy = points[i].y - points[j].y;
+        let dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 110) {
+          ctx.beginPath();
+          ctx.moveTo(points[i].x, points[i].y);
+          ctx.lineTo(points[j].x, points[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function resizeCanvas() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    bgCanvas.width = width;
+    bgCanvas.height = height;
+    initPoints();
+  }
+
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+  });
+
+  function animate() {
+    drawBackground();
+    requestAnimationFrame(animate);
+  }
+
+  resizeCanvas();
+  animate();
+
+  // ----------- Prédiction & Validation -------------
+
+  function verifyLogin() {
+    const promo = document.getElementById('promoCode').value.trim().toUpperCase();
+    const userId = document.getElementById('userId').value.trim();
+    const error = document.getElementById('errorMsg');
+    error.textContent = '';
+
+    if (promo !== 'PCP5') {
+      error.textContent = "Le code promo est obligatoire et doit être 'PCP5'.";
+      return;
+    }
+    if (!/^\d{4,8}$/.test(userId)) {
+      error.textContent = "L'ID utilisateur doit contenir entre 4 et 8 chiffres.";
+      return;
+    }
+
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('predictionSection').style.display = 'block';
+
+    generatePrediction();
+  }
+
+  function generatePrediction() {
+    const grid = document.getElementById('grid');
+    const starsCountDiv = document.getElementById('starsCount');
+    grid.innerHTML = '';
+
+    // Choix étoile entre 4 et 7, fréquence pondérée
+    const starOptions = [4, 4, 5, 5, 6, 6, 7];
+    const starsCount = starOptions[Math.floor(Math.random() * starOptions.length)];
+
+    // 3 bombes uniques
+    const bombs = new Set();
+    while (bombs.size < 3) {
+      bombs.add(Math.floor(Math.random() * 25));
+    }
+
+    // Récupérer cases non bombes pour placer étoiles
+    const nonBombCells = [];
+    for(let i=0; i<25; i++) {
+      if(!bombs.has(i)) nonBombCells.push(i);
+    }
+
+    // Choisir indices étoiles aléatoires sans répétition
+    const starIndices = [];
+    while(starIndices.length < starsCount) {
+      const idx = nonBombCells[Math.floor(Math.random() * nonBombCells.length)];
+      if(!starIndices.includes(idx)) starIndices.push(idx);
+    }
+
+    // Construire grille
+    for(let i=0; i<25; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+
+      if(bombs.has(i)) {
+        cell.textContent = ''; // Bombe invisible
+      } else if(starIndices.includes(i)) {
+        cell.textContent = '⭐️';
+        cell.classList.add('star');
+      } else {
+        cell.textContent = '';
+      }
+
+      grid.appendChild(cell);
+    }
+
+    starsCountDiv.textContent = `Nombre d'étoiles : ${starsCount} — 3 bombes`;
+  }
+</script>
+
+</body>
+</html>
